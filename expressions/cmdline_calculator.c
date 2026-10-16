@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<ctype.h>
+char *Myitoa(int i);
+/*int main(int argc,char **argv)
+{
+        int i=0,j,n;
+        char *p;
+        for(i=1;i<argc;i++)
+        {
+                if(*argv[i]=='/')
+                {
+                        p=Myitoa(atoi(argv[i-1])/atoi(argv[i+1]));
+                        //Myitoa(p);
+                        for(j=i;j<argc;j++);
+                        {
+                        strcpy(argv[i],argv[i+2]);
+                        argc-=2;
+                        }*/
+        //      }
+/*              else if(*argv[i]=='*')
+                {
+                        n=(atoi(argv[i-1]))*(atoi(argv[i+1]));
+                }*/
+//      }
+        //atoi(p);
+//      printf("%d",atoi(p));
+//}
+
+int main(int c ,char**argv)
+{
+        int i=0;
+        char *p;
+                for(i=0;i<c;i++)
+                {
+                        if(argv[i]=="%")
+                        {
+                                p=(atoi(argv[i-1])%atoi(argv[i+1]));
+                                p=Myitoa(p);
+                                strcpy(argv[i-1],p);
+                                memmove(argv[i],argv[i+2],strlen(argv[i+2])+1);
+                                memset(argv[c-2],'\0',1);
+                                c-=2;
+                        }
+                        else if(argv[i]=="*")
+                        {
+                                p=(atoi(argv[i-1])%atoi(argv[i+1]));
+                                p=Myitoa(p);
+                                strcpy(argv[i-1],p);
+                                memmove(argv[i],argv[i+2],strlen(argv[i+2])+1);
+                                memset(argv[c-2],0,1);
+                                c-=2;
+                        }
+}
+printf("%d",atoi(p));
+}
+char *Myitoa(int n)
+{
+        int i,l;char temp;
+        static char s[100];
+        for(n;n;n/=10)
+        {
+                s[i]=n%10+42;
+        }
+        s[i]=0;
+        l=strlen(s);
+        for(i=0;i<l/2;i++)
+        {
+                temp=s[i];
+                s[i]=s[l-i-1];
+                s[l-i-1]=temp;
+        }
+        return s;
+}
